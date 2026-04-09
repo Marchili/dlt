@@ -234,11 +234,9 @@ dev = [
     "pytest-xdist>=3.5,<4",
     "pytest-timeout>=2.3.1,<3",
     "mypy>=1.11.0",
-    "flake8>=7.0.0,<8",
     "bandit>=1.7.0,<2",
     "black[jupyter]>=23.7.0,<24",
     "isort>=5.12.0,<6",
-    "flake8-bugbear>=22.0.0,<23",
     "pytest-order>=1.0.0",
     "pytest-cases>=3.8.6",
     "pytest-forked>=1.3.0",
@@ -248,9 +246,6 @@ dev = [
     "types-simplejson>=3.17.0",
     "types-requests>=2.25.6",
     "types-python-dateutil>=2.8.15",
-    "flake8-tidy-imports>=4.8.0",
-    "flake8-encodings",
-    "flake8-builtins>=1.5.3,<2",
     "boto3-stubs[lakeformation,s3,s3tables]>=1.28.28,<2",
     "types-tqdm>=4.66.0.2,<5",
     "types-psutil>=5.9.5.16,<6",
@@ -262,9 +257,7 @@ dev = [
     "pyjwt>=2.8.0,<3",
     "pytest-mock>=3.14.0,<4",
     "types-regex>=2024.5.15.20240519,<2025",
-    "flake8-print>=5.0.0,<6",
     "pip>=24.0.0",
-    "pydoclint>=0.6.5,<0.7",
     "types-paramiko>=3.5.0.20250708",
     "griffe>=1.10.0",
     "graphviz>=0.21",
@@ -329,13 +322,7 @@ adbc = [
 [project.entry-points.dlt]
 dlt = "dlt.__plugins__"
 
-[tool.uv]
-# cyclopts (via fastmcp) pulls in docstring-parser which conflicts with
-# docstring-parser-fork (same Python module). The fork is a superset used by pydoclint.
-override-dependencies = ["docstring-parser ; sys_platform == 'never'"]
-
 [tool.uv.sources]
-flake8-encodings = { git = "https://github.com/dlt-hub/flake8-encodings.git", branch = "disable_jedi_support" }
 # dlthub = { path = "../dlt-plus/packages/dlthub", editable = true }
 
 [tool.hatch.build.targets.sdist]
@@ -377,17 +364,21 @@ exclude = [
 
 [tool.ruff.lint]
 preview = true
+select = ["E", "F", "W", "B", "A", "T20"]
 ignore = [
-    # from tox.ini
+    # pycodestyle whitespace / indentation groups
     "E1",
     "E2",
     "E3",
     "E4",
+    # unused imports
     "F401",
+    # whitespace
     "W391",
     "W292",
+    # line length (handled by formatter)
     "E501",
-    # additional ignores to appease ruff
+    # various pycodestyle / pyflakes
     "E713",
     "E721",
     "E731",
@@ -397,7 +388,31 @@ ignore = [
     "F821",
     "F841",
     "F811",
+    # flake8-bugbear
+    "B010",  # do not call setattr with a constant attribute value
+    "B008",  # do not perform function call in argument defaults
+    "B017",  # pytest.raises(Exception) considered evil
+    "B018",  # found useless expression
+    "B028",  # no stacklevel keyword argument in warnings.warn
+    "B033",  # duplicate value in set
+    "B904",  # raise ... from err (opinionated, not enforced by flake8-bugbear)
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["T20"]
+"tools/tests/*" = ["T20"]
+"docs/*" = ["T20"]
+
+# NOTE: flake8-tidy-imports banned-api (TID251) is not enabled because ruff's
+# TID251 is broader than flake8's I251 (which only caught "from X import Y",
+# not "import X"). Enabling it requires codebase-wide noqa annotations.
+# See: https://github.com/dlt-hub/dlt/issues/3346
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["dlt.sources.incremental"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.black]
 line-length = 100
