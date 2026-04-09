@@ -37,7 +37,7 @@ dev-airflow: has-uv ## Prepares development environment with airflow support
 dev-hub: has-uv ## Prepares development environment with hub support
 	uv sync --all-extras --group dev --group providers --group pipeline --group sources --group sentry-sdk --group ibis --group adbc --group dashboard-tests
 
-lint: lint-core lint-security lint-docstrings lint-lock lint-deps ## Runs all linters (mypy, ruff, flake8, bandit, docstrings, lockfile, deps)
+lint: lint-core lint-security lint-docstrings lint-lock lint-deps ## Runs all linters (mypy, ruff, bandit, docstrings, lockfile, deps)
 
 lint-lock: ## Checks uv lockfile is in sync
 	uv lock --check
@@ -47,12 +47,9 @@ lint-deps: ## Checks dependencies, hub extras, and API breaking changes (informa
 	-uv run python -m tools.check_dependency_changes
 	-uv run python -m tools.check_api_breaking check
 
-lint-core: ## Runs core linting (mypy, ruff, flake8)
+lint-core: ## Runs core linting (mypy, ruff)
 	uv run mypy dlt tests tools
 	uv run ruff check
-	# NOTE: we exclude all D lint errors (docstrings)
-	uv run flake8 --extend-ignore=D --max-line-length=200 dlt tools
-	uv run flake8 --extend-ignore=D --max-line-length=200 tests --exclude tests/reflection/module_cases,tests/common/reflection/cases/modules/
 
 format: ## Formats code with black
 	uv run black dlt tests tools --extend-exclude='.*syntax_error.py|^_storage[^/]*/'
@@ -66,7 +63,7 @@ lint-security: ## Runs security linting with bandit
 	uv run bandit -r dlt/ -n 3 -lll
 
 lint-docstrings: ## Checks docstrings for public API classes and functions
-	uv run flake8 --count \
+	uv run ruff check --select D,DOC --ignore DOC501,DOC502,DOC503 \
 		dlt/common/pipeline.py \
 		dlt/extract/decorators.py \
 		dlt/destinations/decorators.py \

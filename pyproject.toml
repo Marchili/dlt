@@ -234,11 +234,9 @@ dev = [
     "pytest-xdist>=3.5,<4",
     "pytest-timeout>=2.3.1,<3",
     "mypy>=1.11.0",
-    "flake8>=7.0.0,<8",
     "bandit>=1.7.0,<2",
     "black[jupyter]>=23.7.0,<24",
     "isort>=5.12.0,<6",
-    "flake8-bugbear>=22.0.0,<23",
     "pytest-order>=1.0.0",
     "pytest-cases>=3.8.6",
     "pytest-forked>=1.3.0",
@@ -248,9 +246,6 @@ dev = [
     "types-simplejson>=3.17.0",
     "types-requests>=2.25.6",
     "types-python-dateutil>=2.8.15",
-    "flake8-tidy-imports>=4.8.0",
-    "flake8-encodings",
-    "flake8-builtins>=1.5.3,<2",
     "boto3-stubs[lakeformation,s3,s3tables]>=1.28.28,<2",
     "types-tqdm>=4.66.0.2,<5",
     "types-psutil>=5.9.5.16,<6",
@@ -262,9 +257,7 @@ dev = [
     "pyjwt>=2.8.0,<3",
     "pytest-mock>=3.14.0,<4",
     "types-regex>=2024.5.15.20240519,<2025",
-    "flake8-print>=5.0.0,<6",
     "pip>=24.0.0",
-    "pydoclint>=0.6.5,<0.7",
     "types-paramiko>=3.5.0.20250708",
     "griffe>=1.10.0",
     "graphviz>=0.21",
@@ -329,13 +322,7 @@ adbc = [
 [project.entry-points.dlt]
 dlt = "dlt.__plugins__"
 
-[tool.uv]
-# cyclopts (via fastmcp) pulls in docstring-parser which conflicts with
-# docstring-parser-fork (same Python module). The fork is a superset used by pydoclint.
-override-dependencies = ["docstring-parser ; sys_platform == 'never'"]
-
 [tool.uv.sources]
-flake8-encodings = { git = "https://github.com/dlt-hub/flake8-encodings.git", branch = "disable_jedi_support" }
 # dlthub = { path = "../dlt-plus/packages/dlthub", editable = true }
 
 [tool.hatch.build.targets.sdist]
@@ -377,17 +364,23 @@ exclude = [
 
 [tool.ruff.lint]
 preview = true
+select = ["E", "F", "W", "B", "A", "T20", "TID"]
 ignore = [
-    # from tox.ini
+    # pycodestyle whitespace / indentation groups
     "E1",
     "E2",
     "E3",
     "E4",
+    # unused imports
     "F401",
+    # whitespace
     "W391",
     "W292",
+    # line length (handled by formatter)
     "E501",
-    # additional ignores to appease ruff
+    # statement assigned to a function call
+    "E704",
+    # various pycodestyle / pyflakes
     "E713",
     "E721",
     "E731",
@@ -397,7 +390,41 @@ ignore = [
     "F821",
     "F841",
     "F811",
+    # flake8-bugbear: do not call setattr with a constant attribute value
+    "B010",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["T20", "TID251"]
+"tools/tests/*" = ["T20", "TID251"]
+"docs/*" = ["T20", "TID251"]
+"dlt/common/typing.py" = ["TID251"]
+"dlt/_workspace/_templates/*" = ["TID251"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"datetime" = { msg = "use dlt.common.pendulum" }
+"json" = { msg = "use dlt.common.json" }
+"decimal" = { msg = "use dlt.common.decimal" }
+"decimal.Decimal" = { msg = "use dlt.common.Decimal" }
+"open" = { msg = "use dlt.common.open" }
+"pendulum" = { msg = "use dlt.common.pendulum" }
+"ibis" = { msg = "use dlt.common.libs.ibis" }
+"sqlalchemy" = { msg = "use dlt.common.libs.sql_alchemy" }
+"typing.TypedDict" = { msg = "use dlt.common.typing.TypedDict" }
+"typing.ParamSpec" = { msg = "use dlt.common.typing.ParamSpec" }
+"typing.Concatenate" = { msg = "use dlt.common.typing.Concatenate" }
+"typing.TypeAlias" = { msg = "use dlt.common.typing.TypeAlias" }
+"typing.Self" = { msg = "use dlt.common.typing.Self" }
+"typing.Never" = { msg = "use dlt.common.typing.Never" }
+"typing.Unpack" = { msg = "use dlt.common.typing.Unpack" }
+"typing.Annotated" = { msg = "use dlt.common.typing.Annotated" }
+"typing.get_original_bases" = { msg = "use dlt.common.typing.get_original_bases" }
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["dlt.sources.incremental"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.black]
 line-length = 100
