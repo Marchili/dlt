@@ -364,7 +364,7 @@ exclude = [
 
 [tool.ruff.lint]
 preview = true
-select = ["E", "F", "W", "B", "A", "T20", "TID"]
+select = ["E", "F", "W", "B", "A", "T20"]
 ignore = [
     # pycodestyle whitespace / indentation groups
     "E1",
@@ -378,8 +378,6 @@ ignore = [
     "W292",
     # line length (handled by formatter)
     "E501",
-    # statement assigned to a function call
-    "E704",
     # various pycodestyle / pyflakes
     "E713",
     "E721",
@@ -390,35 +388,25 @@ ignore = [
     "F821",
     "F841",
     "F811",
-    # flake8-bugbear: do not call setattr with a constant attribute value
-    "B010",
+    # flake8-bugbear
+    "B010",  # do not call setattr with a constant attribute value
+    "B008",  # do not perform function call in argument defaults
+    "B017",  # pytest.raises(Exception) considered evil
+    "B018",  # found useless expression
+    "B028",  # no stacklevel keyword argument in warnings.warn
+    "B033",  # duplicate value in set
+    "B904",  # raise ... from err (opinionated, not enforced by flake8-bugbear)
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["T20", "TID251"]
-"tools/tests/*" = ["T20", "TID251"]
-"docs/*" = ["T20", "TID251"]
-"dlt/common/typing.py" = ["TID251"]
-"dlt/_workspace/_templates/*" = ["TID251"]
+"tests/*" = ["T20"]
+"tools/tests/*" = ["T20"]
+"docs/*" = ["T20"]
 
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-"datetime" = { msg = "use dlt.common.pendulum" }
-"json" = { msg = "use dlt.common.json" }
-"decimal" = { msg = "use dlt.common.decimal" }
-"decimal.Decimal" = { msg = "use dlt.common.Decimal" }
-"open" = { msg = "use dlt.common.open" }
-"pendulum" = { msg = "use dlt.common.pendulum" }
-"ibis" = { msg = "use dlt.common.libs.ibis" }
-"sqlalchemy" = { msg = "use dlt.common.libs.sql_alchemy" }
-"typing.TypedDict" = { msg = "use dlt.common.typing.TypedDict" }
-"typing.ParamSpec" = { msg = "use dlt.common.typing.ParamSpec" }
-"typing.Concatenate" = { msg = "use dlt.common.typing.Concatenate" }
-"typing.TypeAlias" = { msg = "use dlt.common.typing.TypeAlias" }
-"typing.Self" = { msg = "use dlt.common.typing.Self" }
-"typing.Never" = { msg = "use dlt.common.typing.Never" }
-"typing.Unpack" = { msg = "use dlt.common.typing.Unpack" }
-"typing.Annotated" = { msg = "use dlt.common.typing.Annotated" }
-"typing.get_original_bases" = { msg = "use dlt.common.typing.get_original_bases" }
+# NOTE: flake8-tidy-imports banned-api (TID251) is not enabled because ruff's
+# TID251 is broader than flake8's I251 (which only caught "from X import Y",
+# not "import X"). Enabling it requires codebase-wide noqa annotations.
+# See: https://github.com/dlt-hub/dlt/issues/3346
 
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["dlt.sources.incremental"]

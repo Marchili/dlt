@@ -40,9 +40,6 @@ resolution-markers = [
     "python_full_version < '3.10' and os_name != 'nt' and sys_platform == 'emscripten'",
 ]
 
-[manifest]
-overrides = [{ name = "docstring-parser", marker = "sys_platform == 'never'" }]
-
 [[package]]
 name = "about-time"
 version = "4.2.1"
@@ -801,19 +798,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/de/cf/d547feed25b5244fcb9392e288ff9fdc3280b10260362fc45d37a798a6ee/asn1crypto-1.5.1.tar.gz", hash = "sha256:13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c", size = 121080, upload-time = "2022-03-15T14:46:52.889Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c9/7f/09065fd9e27da0eda08b4d6897f1c13535066174cc023af248fc2a8d5e5a/asn1crypto-1.5.1-py2.py3-none-any.whl", hash = "sha256:db4e40728b728508912cbb3d44f19ce188f218e9eba635821bb4b68564f8fd67", size = 105045, upload-time = "2022-03-15T14:46:51.055Z" },
-]
-
-[[package]]
-name = "astatine"
-version = "0.3.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "asttokens" },
-    { name = "domdf-python-tools" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/a4/8a/544e058e5ed049cffd67006944872216c48e86b9004ceeefbb33a9759d3d/astatine-0.3.3.tar.gz", hash = "sha256:0c58a7844b5890ff16da07dbfeb187341d8324cb4378940f89d795cbebebce08", size = 6687, upload-time = "2023-08-15T10:38:28.151Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/1e/72/58e5d9b9965f55a1b652c7ea73dceedf4f8cea08d1310aa2d4102202acb8/astatine-0.3.3-py3-none-any.whl", hash = "sha256:6d8c914f01fbea252cb8f31563f2e766a9ab03c02b9bcc37d18f7d9138828401", size = 17376, upload-time = "2023-08-15T10:38:26.735Z" },
 ]
 
 [[package]]
@@ -1914,7 +1898,7 @@ version = "4.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs", version = "25.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "docstring-parser", marker = "python_full_version >= '3.10' and sys_platform == 'never'" },
+    { name = "docstring-parser", marker = "python_full_version >= '3.10'" },
     { name = "rich", marker = "python_full_version >= '3.10'" },
     { name = "rich-rst", marker = "python_full_version >= '3.10'" },
     { name = "tomli", marker = "python_full_version == '3.10.*'" },
@@ -2665,19 +2649,12 @@ dev = [
     { name = "bandit" },
     { name = "black", extra = ["jupyter"] },
     { name = "boto3-stubs", extra = ["lakeformation", "s3", "s3tables"] },
-    { name = "flake8" },
-    { name = "flake8-bugbear" },
-    { name = "flake8-builtins" },
-    { name = "flake8-encodings" },
-    { name = "flake8-print" },
-    { name = "flake8-tidy-imports" },
     { name = "graphviz" },
     { name = "griffe", version = "1.14.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "griffe", version = "1.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "isort" },
     { name = "mypy" },
     { name = "pip" },
-    { name = "pydoclint" },
     { name = "pyjwt" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -2888,18 +2865,11 @@ dev = [
     { name = "bandit", specifier = ">=1.7.0,<2" },
     { name = "black", extras = ["jupyter"], specifier = ">=23.7.0,<24" },
     { name = "boto3-stubs", extras = ["lakeformation", "s3", "s3tables"], specifier = ">=1.28.28,<2" },
-    { name = "flake8", specifier = ">=7.0.0,<8" },
-    { name = "flake8-bugbear", specifier = ">=22.0.0,<23" },
-    { name = "flake8-builtins", specifier = ">=1.5.3,<2" },
-    { name = "flake8-encodings", git = "https://github.com/dlt-hub/flake8-encodings.git?branch=disable_jedi_support" },
-    { name = "flake8-print", specifier = ">=5.0.0,<6" },
-    { name = "flake8-tidy-imports", specifier = ">=4.8.0" },
     { name = "graphviz", specifier = ">=0.21" },
     { name = "griffe", specifier = ">=1.10.0" },
     { name = "isort", specifier = ">=5.12.0,<6" },
     { name = "mypy", specifier = ">=1.11.0" },
     { name = "pip", specifier = ">=24.0.0" },
-    { name = "pydoclint", specifier = ">=0.6.5,<0.7" },
     { name = "pyjwt", specifier = ">=2.8.0,<3" },
     { name = "pytest", specifier = ">=7.4.4,<8" },
     { name = "pytest-asyncio", specifier = ">=0.23.5,<0.24" },
@@ -3011,35 +2981,12 @@ wheels = [
 ]
 
 [[package]]
-name = "docstring-parser-fork"
-version = "0.0.14"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/66/bf/27f9cab2f0cd1d17a4420572088bbc19f36d726fbcf165edf226a8926dbc/docstring_parser_fork-0.0.14.tar.gz", hash = "sha256:a2743a63d8d36c09650594f7b4ab5b2758fee8629dcf794d1b221b23179baa5c", size = 34551, upload-time = "2025-09-07T17:27:38.272Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bf/50/98b146aea0f1cd7531d25f12bea69fa9ce8d1662124f93fb30dc4511b65e/docstring_parser_fork-0.0.14-py3-none-any.whl", hash = "sha256:4c544f234ef2cc2749a3df32b70c437d77888b1099143a1ad5454452c574b9af", size = 43063, upload-time = "2025-09-07T17:27:37.012Z" },
-]
-
-[[package]]
 name = "docutils"
 version = "0.21.2"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ae/ed/aefcc8cd0ba62a0560c3c18c33925362d46c6075480bfa4df87b28e169a9/docutils-0.21.2.tar.gz", hash = "sha256:3a6b18732edf182daa3cd12775bbb338cf5691468f91eeeb109deff6ebfa986f", size = 2204444, upload-time = "2024-04-23T18:57:18.24Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8f/d7/9322c609343d929e75e7e5e6255e614fcc67572cfd083959cdef3b7aad79/docutils-0.21.2-py3-none-any.whl", hash = "sha256:dafca5b9e384f0e419294eb4d2ff9fa826435bf15f15b7bd45723e8ad76811b2", size = 587408, upload-time = "2024-04-23T18:57:14.835Z" },
-]
-
-[[package]]
-name = "domdf-python-tools"
-version = "3.10.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "natsort" },
-    { name = "typing-extensions", version = "4.14.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
-    { name = "typing-extensions", version = "4.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/36/8b/ab2d8a292bba8fe3135cacc8bfd3576710a14b8f2d0a8cde19130d5c9d21/domdf_python_tools-3.10.0.tar.gz", hash = "sha256:2ae308d2f4f1e9145f5f4ba57f840fbfd1c2983ee26e4824347789649d3ae298", size = 100458, upload-time = "2025-02-12T17:34:05.747Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/5b/11/208f72084084d3f6a2ed5ebfdfc846692c3f7ad6dce65e400194924f7eed/domdf_python_tools-3.10.0-py3-none-any.whl", hash = "sha256:5e71c1be71bbcc1f881d690c8984b60e64298ec256903b3147f068bc33090c36", size = 126860, upload-time = "2025-02-12T17:34:04.093Z" },
 ]
 
 [[package]]
@@ -3241,94 +3188,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/0a/10/c23352565a6544bdc5353e0b15fc1c563352101f30e24bf500207a54df9a/filelock-3.18.0.tar.gz", hash = "sha256:adbc88eabb99d2fec8c9c1b229b171f18afa655400173ddc653d5d01501fb9f2", size = 18075, upload-time = "2025-03-14T07:11:40.47Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4d/36/2a115987e2d8c300a974597416d9de88f2444426de9571f4b59b2cca3acc/filelock-3.18.0-py3-none-any.whl", hash = "sha256:c401f4f8377c4464e6db25fff06205fd89bdd83b65eb0488ed1b160f780e21de", size = 16215, upload-time = "2025-03-14T07:11:39.145Z" },
-]
-
-[[package]]
-name = "flake8"
-version = "7.1.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "mccabe" },
-    { name = "pycodestyle" },
-    { name = "pyflakes" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/37/72/e8d66150c4fcace3c0a450466aa3480506ba2cae7b61e100a2613afc3907/flake8-7.1.1.tar.gz", hash = "sha256:049d058491e228e03e67b390f311bbf88fce2dbaa8fa673e7aea87b7198b8d38", size = 48054, upload-time = "2024-08-04T20:32:44.311Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d9/42/65004373ac4617464f35ed15931b30d764f53cdd30cc78d5aea349c8c050/flake8-7.1.1-py2.py3-none-any.whl", hash = "sha256:597477df7860daa5aa0fdd84bf5208a043ab96b8e96ab708770ae0364dd03213", size = 57731, upload-time = "2024-08-04T20:32:42.661Z" },
-]
-
-[[package]]
-name = "flake8-bugbear"
-version = "22.12.6"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs", version = "25.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
-    { name = "attrs", version = "25.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/da/b5/83a89114a82a2764ddfe27451df6b69c46513f88a3f66206514265b6f447/flake8-bugbear-22.12.6.tar.gz", hash = "sha256:4cdb2c06e229971104443ae293e75e64c6107798229202fbe4f4091427a30ac0", size = 44094, upload-time = "2022-12-06T19:07:02.569Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/a1/ed74a6995d908bb89f9ffbe197e5f729c1546dba70d1995e7db70dfaafb5/flake8_bugbear-22.12.6-py3-none-any.whl", hash = "sha256:b69a510634f8a9c298dfda2b18a8036455e6b19ecac4fe582e4d7a0abfa50a30", size = 23693, upload-time = "2022-12-06T19:07:00.822Z" },
-]
-
-[[package]]
-name = "flake8-builtins"
-version = "1.5.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/84/5a/bdeb2ffd2bbf200d17bd4c654a1c789380ca654515cdd321696ee6c80189/flake8-builtins-1.5.3.tar.gz", hash = "sha256:09998853b2405e98e61d2ff3027c47033adbdc17f9fe44ca58443d876eb00f3b", size = 16581, upload-time = "2020-05-14T10:45:03.482Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fb/84/6ee650fc479ecee8f143d20fdb7526595ef8c41382d24cc380c4c08e1aac/flake8_builtins-1.5.3-py2.py3-none-any.whl", hash = "sha256:7706babee43879320376861897e5d1468e396a40b8918ed7bccf70e5f90b8687", size = 12988, upload-time = "2020-05-14T10:45:01.642Z" },
-]
-
-[[package]]
-name = "flake8-encodings"
-version = "0.5.1"
-source = { git = "https://github.com/dlt-hub/flake8-encodings.git?branch=disable_jedi_support#ab20ac162de68c4a0956adc93dc14928a9f7dcb9" }
-dependencies = [
-    { name = "astatine" },
-    { name = "domdf-python-tools" },
-    { name = "flake8" },
-    { name = "flake8-helper" },
-]
-
-[[package]]
-name = "flake8-helper"
-version = "0.2.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fe/4f/027bbe420a1fdc79f9812113e72029aacd353974df2474b17a8a544409dd/flake8_helper-0.2.2.tar.gz", hash = "sha256:02e33eb8014c9accd802ef4a7a266e2ec8d7b9225ce94d19bd537d4631bb4f87", size = 5183, upload-time = "2023-11-22T11:32:24.302Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a1/fe/12de9bd1982a50a5cd83df74882ad5a9725a24759d70ff0caa0ea2ba187a/flake8_helper-0.2.2-py3-none-any.whl", hash = "sha256:75033d6704f7f5701b04085627b66da252ac82894d50bdf1127e7b11444f1025", size = 13278, upload-time = "2023-11-22T11:32:22.533Z" },
-]
-
-[[package]]
-name = "flake8-print"
-version = "5.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-    { name = "pycodestyle" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/2b/a6/770c5832a6b563e023def7d81925d1b9f3079ebc805e48be0a5ee206f716/flake8-print-5.0.0.tar.gz", hash = "sha256:76915a2a389cc1c0879636c219eb909c38501d3a43cc8dae542081c9ba48bdf9", size = 5166, upload-time = "2022-04-30T16:19:22.711Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/74/2c/aa2ffda404b5d9c89dad8bcc4e0f4af673ab2de67e96997d13f04ad68b5b/flake8_print-5.0.0-py3-none-any.whl", hash = "sha256:84a1a6ea10d7056b804221ac5e62b1cee1aefc897ce16f2e5c42d3046068f5d8", size = 5687, upload-time = "2022-04-30T16:19:24.307Z" },
-]
-
-[[package]]
-name = "flake8-tidy-imports"
-version = "4.11.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d7/03/9ea93e3ab6e26a6c5da23c95318101491b92f5a0777d1e80cf2e39d11d02/flake8_tidy_imports-4.11.0.tar.gz", hash = "sha256:fcd57e275a9f4f8163db2ecb17c9c942d311750e2315cf9ae931f22f7043d496", size = 13666, upload-time = "2024-10-27T22:36:50.553Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/06/3b/d3c1b7f47a20c41b4811e15a783d29b1e83921422152a9770c66dea1017e/flake8_tidy_imports-4.11.0-py3-none-any.whl", hash = "sha256:607a76a7c2a9dec682e214f0692d4e7876862a618b766cef8f16979efac1ce22", size = 10013, upload-time = "2024-10-27T22:36:48.93Z" },
 ]
 
 [[package]]
@@ -5693,15 +5552,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mccabe"
-version = "0.7.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e7/ff/0ffefdcac38932a54d2b5eed4e0ba8a408f215002cd178ad1df0f2806ff8/mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325", size = 9658, upload-time = "2022-01-24T01:14:51.113Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/27/1a/1f68f9ba0c207934b35b86a8ca3aad8395a3d6dd7921c0686e23853ff5a9/mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e", size = 7350, upload-time = "2022-01-24T01:14:49.62Z" },
-]
-
-[[package]]
 name = "mcp"
 version = "1.26.0"
 source = { registry = "https://pypi.org/simple" }
@@ -6580,15 +6430,6 @@ resolution-markers = [
 sdist = { url = "https://files.pythonhosted.org/packages/75/59/81d0f4cad21484083466f278e6b392addd9f4205b48d45b5c8771670ebf8/narwhals-2.17.0.tar.gz", hash = "sha256:ebd5bc95bcfa2f8e89a8ac09e2765a63055162837208e67b42d6eeb6651d5e67", size = 620306, upload-time = "2026-02-23T09:44:34.142Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4b/27/20770bd6bf8fbe1e16f848ba21da9df061f38d2e6483952c29d2bb5d1d8b/narwhals-2.17.0-py3-none-any.whl", hash = "sha256:2ac5307b7c2b275a7d66eeda906b8605e3d7a760951e188dcfff86e8ebe083dd", size = 444897, upload-time = "2026-02-23T09:44:32.006Z" },
-]
-
-[[package]]
-name = "natsort"
-version = "8.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e2/a9/a0c57aee75f77794adaf35322f8b6404cbd0f89ad45c87197a937764b7d0/natsort-8.4.0.tar.gz", hash = "sha256:45312c4a0e5507593da193dedd04abb1469253b601ecaf63445ad80f0a1ea581", size = 76575, upload-time = "2023-06-20T04:17:19.925Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ef/82/7a9d0550484a62c6da82858ee9419f3dd1ccc9aa1c26a1e43da3ecd20b0d/natsort-8.4.0-py3-none-any.whl", hash = "sha256:4732914fb471f56b5cce04d7bae6f164a592c7712e1c85f9ef585e197299521c", size = 38268, upload-time = "2023-06-20T04:17:17.522Z" },
 ]
 
 [[package]]
@@ -8544,15 +8385,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pycodestyle"
-version = "2.12.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/43/aa/210b2c9aedd8c1cbeea31a50e42050ad56187754b34eb214c46709445801/pycodestyle-2.12.1.tar.gz", hash = "sha256:6838eae08bbce4f6accd5d5572075c63626a15ee3e6f842df996bf62f6d73521", size = 39232, upload-time = "2024-08-04T20:26:54.576Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3a/d8/a211b3f85e99a0daa2ddec96c949cac6824bd305b040571b82a03dd62636/pycodestyle-2.12.1-py2.py3-none-any.whl", hash = "sha256:46f0fb92069a7c28ab7bb558f05bfc0110dac69a0cd23c61ea0040283a9d78b3", size = 31284, upload-time = "2024-08-04T20:26:53.173Z" },
-]
-
-[[package]]
 name = "pycparser"
 version = "2.22"
 source = { registry = "https://pypi.org/simple" }
@@ -8957,20 +8789,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pydoclint"
-version = "0.6.5"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "click" },
-    { name = "docstring-parser-fork" },
-    { name = "tomli", marker = "python_full_version < '3.11'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/37/fe/a2aef1313507ed474af125c8f94a957e02806b95cf712caa421d0a40cbd0/pydoclint-0.6.5.tar.gz", hash = "sha256:e7e630d34808ea3f7cd44fc0d412b3f7997cf6a1d28e1dddbbc721ea6190bb04", size = 54475, upload-time = "2025-04-03T05:18:11.245Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bd/87/37e45c8debf81e35fa1242b121a4ea605feabefe569a96bc35b2ae72a03a/pydoclint-0.6.5-py2.py3-none-any.whl", hash = "sha256:a83565803f77b6f4f3934d85ec661f36c3c8931c9ae8c2b36775b5880c1f09b0", size = 48706, upload-time = "2025-04-03T05:18:09.762Z" },
-]
-
-[[package]]
 name = "pyee"
 version = "13.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -8981,15 +8799,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/95/03/1fd98d5841cd7964a27d729ccf2199602fe05eb7a405c1462eb7277945ed/pyee-13.0.0.tar.gz", hash = "sha256:b391e3c5a434d1f5118a25615001dbc8f669cf410ab67d04c4d4e07c55481c37", size = 31250, upload-time = "2025-03-17T18:53:15.955Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9b/4d/b9add7c84060d4c1906abe9a7e5359f2a60f7a9a4f67268b2766673427d8/pyee-13.0.0-py3-none-any.whl", hash = "sha256:48195a3cddb3b1515ce0695ed76036b5ccc2ef3a9f963ff9f77aec0139845498", size = 15730, upload-time = "2025-03-17T18:53:14.532Z" },
-]
-
-[[package]]
-name = "pyflakes"
-version = "3.2.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/57/f9/669d8c9c86613c9d568757c7f5824bd3197d7b1c6c27553bc5618a27cce2/pyflakes-3.2.0.tar.gz", hash = "sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f", size = 63788, upload-time = "2024-01-05T00:28:47.703Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d4/d7/f1b7db88d8e4417c5d47adad627a93547f44bdc9028372dbd2313f34a855/pyflakes-3.2.0-py2.py3-none-any.whl", hash = "sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a", size = 62725, upload-time = "2024-01-05T00:28:45.903Z" },
 ]
 
 [[package]]
